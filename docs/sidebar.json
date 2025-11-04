@@ -55,6 +55,7 @@
     "label": "Development",
     "items": [
       { "label": "NPM", "slug": "docs/npm" },
+      { "label": "Installation Scripts", "slug": "docs/development/installation-scripts" },
       { "label": "Releases", "slug": "docs/releases" }
     ]
   },

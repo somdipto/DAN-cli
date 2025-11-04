@@ -82,6 +82,24 @@ npm install
 npm install -g .
 ```
 
+### Install using Installation Scripts
+
+For an automated installation experience across different platforms, you can use our installation scripts:
+
+#### Linux/macOS
+```bash
+curl -fsSL https://raw.githubusercontent.com/somdipto/DAN-cli/main/install-dan-cli.sh -o install-dan-cli.sh
+chmod +x install-dan-cli.sh
+./install-dan-cli.sh
+```
+
+#### Windows
+```powershell
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/somdipto/DAN-cli/main/install-dan-cli.ps1" -OutFile "install-dan-cli.ps1"
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+.\install-dan-cli.ps1
+```
+
 ### Install globally with Homebrew (macOS/Linux)
 
 ```bash

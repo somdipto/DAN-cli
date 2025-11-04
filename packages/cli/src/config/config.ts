@@ -121,6 +121,7 @@ export interface CliArgs {
   vlmSwitchMode: string | undefined;
   useSmartEdit: boolean | undefined;
   outputFormat: string | undefined;
+  multiAgent: boolean | undefined;
 }
 
 export async function parseArguments(settings: Settings): Promise<CliArgs> {
@@ -343,6 +344,12 @@ export async function parseArguments(settings: Settings): Promise<CliArgs> {
           type: 'string',
           description: 'The format of the CLI output.',
           choices: ['text', 'json'],
+        })
+        .option('multi-agent', {
+          alias: 'ma',
+          type: 'boolean',
+          description: 'Run in multi-agent organizational mode?',
+          default: false,
         })
         .deprecateOption(
           'show-memory-usage',
