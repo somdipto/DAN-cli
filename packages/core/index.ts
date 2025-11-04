@@ -47,3 +47,10 @@ export * from './src/utils/request-tokenizer/supportedImageFormats.js';
 export { ClearcutLogger } from './src/telemetry/clearcut-logger/clearcut-logger.js';
 export { QwenLogger } from './src/telemetry/qwen-logger/qwen-logger.js';
 export { logModelSlashCommand } from './src/telemetry/loggers.js';
+
+// Export agentic society functionality
+export { AgenticSocietyManager } from './src/agents/AgenticSocietyManager.js';
+export { OrganizationCoordinator } from './src/agents/organization/OrganizationCoordinator.js';
+export { Agent } from './src/agents/framework/Agent.js';
+export { AgentIdentity, AgentRole } from './src/agents/hierarchy/AgentIdentity.js';
+export { KnowledgeGraph, OrganizationalKnowledgeService } from './src/agents/memory/KnowledgeGraph.js';

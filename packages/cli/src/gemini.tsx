@@ -399,6 +399,59 @@ export async function main() {
       return runZedIntegration(config, settings, extensions, argv);
     }
 
+    // Check if multi-agent mode is enabled
+    if (argv.multiAgent) {
+      const { AgenticSocietyManager } = await import('@qwen-code/qwen-code-core');
+      const societyManager = new AgenticSocietyManager();
+      
+      try {
+        await societyManager.initialize();
+        await societyManager.start();
+        
+        console.log('\n💬 Multi-Agent Group Chat Ready');
+        console.log('Ask questions and watch agents discuss among themselves!');
+        console.log('Type /quit to exit.\n');
+        
+        // Start group chat interface
+        const readline = await import('readline');
+        const rl = readline.createInterface({
+          input: process.stdin,
+          output: process.stdout,
+          prompt: '👤 You> '
+        });
+
+        rl.prompt();
+
+        rl.on('line', async (input) => {
+          const trimmed = input.trim();
+          
+          if (trimmed === '/quit' || trimmed === '/exit') {
+            console.log('Goodbye!');
+            rl.close();
+            process.exit(0);
+          }
+          
+          if (trimmed) {
+            console.log('\n📢 Broadcasting to agent group...\n');
+            await societyManager.startGroupChat(trimmed);
+            console.log('\n' + '─'.repeat(60) + '\n');
+          }
+          
+          rl.prompt();
+        });
+
+        rl.on('close', () => {
+          console.log('Group chat ended.');
+          process.exit(0);
+        });
+        
+      } catch (error) {
+        console.error('Error running agentic society:', error);
+        process.exit(1);
+      }
+      return; // Exit here to prevent regular CLI from starting
+    }
+
     let input = config.getQuestion();
     const startupWarnings = [
       ...(await getStartupWarnings()),
